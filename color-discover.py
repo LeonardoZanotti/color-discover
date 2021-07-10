@@ -48,7 +48,6 @@ for (lower, upper, title) in boundaries:
 	## calculate the percentage
 	totalPixels = output.size/3
 	nonBlack = cv2.countNonZero(cv2.cvtColor(output, cv2.COLOR_BGR2GRAY))
-	print(totalPixels, nonBlack)
 	percent = round(nonBlack * 100 / totalPixels, 2)
 
 	## append to array to show in the end
