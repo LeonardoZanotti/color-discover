@@ -11,6 +11,8 @@ args = vars(ap.parse_args())
 
 # load the image
 image = cv2.imread(args["image"], cv2.IMREAD_COLOR)
+if image is None:
+	print('Use python3.7 color-discover-rgb.py --image path/to/image')
 image_gau = cv2.GaussianBlur(image, (5, 5), 0)
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
