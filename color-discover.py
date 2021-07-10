@@ -46,18 +46,19 @@ for (lower, upper, title) in boundaries:
 	output_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
 
 	## calculate the percentage
-	summed = np.sum(output, axis=2)
-	totalPixels = output.size
-	nonBlack = np.count_nonzero(summed)
-	percent = str(round(nonBlack * 100 / totalPixels, 2))
+	totalPixels = output.size/3
+	nonBlack = cv2.countNonZero(cv2.cvtColor(output, cv2.COLOR_BGR2GRAY))
+	print(totalPixels, nonBlack)
+	percent = round(nonBlack * 100 / totalPixels, 2)
 
 	## append to array to show in the end
 	imagesToShow.append([output_rgb, percent, title])
 
 # show the images
 for (output, percent, title) in imagesToShow:
-	plt.subplot(121),plt.imshow(image_rgb),plt.title('Original')
-	plt.xticks([]), plt.yticks([])
-	plt.subplot(122),plt.imshow(output),plt.title(title + ' (' + percent + '%)')
-	plt.xticks([]), plt.yticks([])
-	plt.show()
+	if (percent > 0.5):
+		plt.subplot(121),plt.imshow(image_rgb),plt.title('Original')
+		plt.xticks([]), plt.yticks([])
+		plt.subplot(122),plt.imshow(output),plt.title(title + ' (' + str(percent) + '%)')
+		plt.xticks([]), plt.yticks([])
+		plt.show()
