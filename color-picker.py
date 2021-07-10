@@ -8,7 +8,7 @@ pixel = (20,60,80) # some stupid default
 # mouse callback function for hsl
 def pick_color_hsl(event,x,y,flags,param):
     if event == cv2.EVENT_LBUTTONDOWN:
-        image_hsl = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        image_hsl = cv2.cvtColor(image, cv2.COLOR_BGR2HLS)
         pixel = image_hsl[y, x]
 
         # you might want to adjust the ranges(+-10, etc):
@@ -67,7 +67,7 @@ def main():
 
     if (len(sys.argv) > 2):
         color_style = sys.argv[2]
-        
+
     if ('color_style' in locals() and color_style == 'hsl'):
         cv2.setMouseCallback('bgr', pick_color_hsl)
     else:

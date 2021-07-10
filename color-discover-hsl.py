@@ -13,29 +13,29 @@ args = vars(ap.parse_args())
 image = cv2.imread(args["image"], cv2.IMREAD_COLOR)
 if image is None:
 	print('Use python3.7 color-discover-hsl.py --image path/to/image')
-image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-image_gau = cv2.GaussianBlur(image_hsv, (5, 5), 0)
+image_hls = cv2.cvtColor(image, cv2.COLOR_BGR2HLS)
+image_gau = cv2.GaussianBlur(image_hls, (5, 5), 0)
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # define the list of boundaries
 boundaries = [
-	## HSV												# Average
-	([0, 215, 215], [40, 255, 255], 'Yellow'),			# [0, 255, 255] 
-	([5, 185, 167], [85, 255, 247], 'Light green'),		# [45, 225, 207] 
-	([13, 122, 66], [93, 202, 146], 'Green'),			# [53, 162, 106] 
-	([104, 114, 0], [184, 194, 40], 'Cyan'),			# [144, 154, 0] 
-	([214, 0, 0], [255, 40, 40], 'Blue'),				# [254, 0, 0]
-	([124, 0, 29], [204, 41, 109], 'Dark blue'),		# [164, 1, 69] 
-	([137, 0, 99], [217, 40, 179], 'Purple'),			# [177, 0, 139] 
-	([37, 0, 130], [117, 58, 210], 'Magenta'),			# [77, 18, 170] 
-	([0, 0, 214], [40, 40, 255], 'Red'),				# [0, 0, 254]
-	([0, 30, 210], [47, 110, 255], 'Light red'),		# [7, 70, 250]
-	([0, 98, 210], [40, 178, 255], 'Orange'),			# [0, 138, 250] 
-	([0, 137, 208], [41, 217, 255], 'Burnt yellow'),	# [1, 177, 248]
-	([215, 215, 215], [255, 255, 255], 'White'),		# [255, 255, 255] 
-	([87, 71, 55] , [167, 151, 135], 'Gray')			# [127, 111, 95]
+	## HLS												# Average
+	([25, 118, 245], [35, 138, 255], 'Yellow'), 		# [30, 128, 255]
+	([28, 125, 181], [38, 145, 201], 'Light green'), 	# [33, 135, 191]
+	([40, 98, 119], [50, 118, 139], 'Green'), 			# [45, 108, 129] 
+	([83, 67, 245], [93, 87, 255], 'Cyan'), 			# [88, 77, 255]
+	([115, 117, 245], [125, 137, 255], 'Blue'), 		# [120, 127, 255]
+	([128, 72, 242], [138, 92, 255], 'Darl blue'), 		# [133, 82, 252]
+	([139, 78, 245], [149, 98, 255], 'Purple'), 		# [144, 88, 255]
+	([163, 84, 196], [173, 104, 216], 'Magenta'), 		# [168, 94, 206]
+	([0, 117, 245], [5, 137, 255], 'Red'), 				# [0, 127, 255]
+	([3, 119, 235], [13, 139, 255], 'Light red'), 		# [8, 129, 245] 
+	([12, 115, 245], [22, 135, 255], 'Orange'), 		# [17, 125, 255]
+	([16, 115, 243], [26, 135, 255], 'Burnt yellow'),	# [21, 125, 253]
+	([0, 245, 0], [5, 255, 10], 'White'), 				# [0, 255,   0]
+	([100, 100, 33], [110, 120, 53], 'Gray')			# [105, 110,  43]
 ] 
-
+ 
 imagesToShow = []
 
 # loop over the boundaries
@@ -47,7 +47,7 @@ for (lower, upper, title) in boundaries:
 	# the mask
 	mask = cv2.inRange(image_gau, lower, upper)
 	output = cv2.bitwise_and(image_gau, image_gau, mask = mask)
-	output_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
+	output_rgb = cv2.cvtColor(output, cv2.COLOR_HLS2RGB)
 
 	## calculate the percentage
 	totalPixels = output.size/3
