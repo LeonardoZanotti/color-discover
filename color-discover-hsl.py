@@ -11,6 +11,7 @@ args = vars(ap.parse_args())
 
 # load the image
 image = cv2.imread(args["image"], cv2.IMREAD_COLOR)
+image_gau = cv2.GaussianBlur(image, (5, 5), 0)
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # define the list of boundaries
@@ -41,8 +42,8 @@ for (lower, upper, title) in boundaries:
 	upper = np.array(upper, dtype = "uint8")
 	# find the colors within the specified boundaries and apply
 	# the mask
-	mask = cv2.inRange(image, lower, upper)
-	output = cv2.bitwise_and(image, image, mask = mask)
+	mask = cv2.inRange(image_gau, lower, upper)
+	output = cv2.bitwise_and(image_gau, image_gau, mask = mask)
 	output_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
 
 	## calculate the percentage
