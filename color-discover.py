@@ -34,13 +34,19 @@ for (lower, upper, title) in boundaries:
 	output = cv2.bitwise_and(image, image, mask = mask)
 	output_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
 
-	## calcular porcentagem de cada cor na imagem
-	imagesToShow.append([output_rgb, title])
+	## calculate the percentage
+	summed = np.sum(output, axis=2)
+	totalPixels = output.size
+	nonBlack = np.count_nonzero(summed)
+	percent = str(round(nonBlack * 100 / totalPixels, 2))
+
+	## append to array to show in the end
+	imagesToShow.append([output_rgb, percent, title])
 
 # show the images
-for (output, title) in imagesToShow:
+for (output, percent, title) in imagesToShow:
 	plt.subplot(121),plt.imshow(image_rgb),plt.title('Original')
 	plt.xticks([]), plt.yticks([])
-	plt.subplot(122),plt.imshow(output),plt.title(title)
+	plt.subplot(122),plt.imshow(output),plt.title(title + ' (' + percent + '%)')
 	plt.xticks([]), plt.yticks([])
 	plt.show()
