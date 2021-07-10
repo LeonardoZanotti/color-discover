@@ -13,11 +13,11 @@ def pick_color_hsl(event,x,y,flags,param):
 
         # you might want to adjust the ranges(+-10, etc):
         pixel1 = 180 if pixel[0] + 5 > 180 else pixel[0] + 5
-        pixel2 = 255 if pixel[1] + 10 > 255 else pixel[1] + 10
-        pixel3 = 255 if pixel[2] + 10 > 255 else pixel[2] + 10
+        pixel2 = 255 if pixel[1] + 40 > 255 else pixel[1] + 40
+        pixel3 = 255 if pixel[2] + 40 > 255 else pixel[2] + 40
         pixel4 = 0 if pixel[0] - 5 < 0 else pixel[0] - 5
-        pixel5 = 0 if pixel[1] - 10 < 0 else pixel[1] - 10
-        pixel6 = 0 if pixel[2] - 10 < 0 else pixel[2] - 10
+        pixel5 = 0 if pixel[1] - 40 < 0 else pixel[1] - 40
+        pixel6 = 0 if pixel[2] - 40 < 0 else pixel[2] - 40
         upper = '[' + str(pixel1) + ', ' + str(pixel2) + ', ' + str(pixel3) + ']'
         lower = '[' + str(pixel4) + ', ' + str(pixel5) + ', ' + str(pixel6) + ']'
         print(lower, pixel, upper)
