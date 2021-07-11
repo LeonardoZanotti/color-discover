@@ -16,7 +16,7 @@ def main():
 		print('Use python3.7 color-discover-hsl.py --image path/to/image')
 		return
 	image_hls = cv2.cvtColor(image, cv2.COLOR_BGR2HLS)
-	image_gau = cv2.GaussianBlur(image_hls, (5, 5), 0)
+	image_gau = cv2.medianBlur(image_hls, 15)
 	image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 	# define the list of boundaries
