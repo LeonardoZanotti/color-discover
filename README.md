@@ -1,7 +1,7 @@
 ![](img/readme.png)
 
 # Color discover
-Python program to help colorblind people to discover a object color just by upload a image to the program or poining the camera to it.
+Python program to help colorblind people to discover a object color just by uploading a image to the program or potining the camera to it.
 
 ## Idea
 This program was designed to be some type of color identifier, expecting to help colorblind people to discover the name of a color of an object. So, if you upload a image of a red object, its expected the program show exactly the red parts of the object and declare that its the red color in the object.
