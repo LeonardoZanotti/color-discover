@@ -18,14 +18,11 @@ def pick_color_hsl(event,x,y,flags,param):
         pixel4 = 0 if pixel[0] - 15 < 0 else pixel[0] - 15
         pixel5 = 0 if pixel[1] - 64 < 0 else pixel[1] - 64
         pixel6 = 0 if pixel[2] - 64 < 0 else pixel[2] - 64
-        upper = '[' + str(pixel1) + ', ' + str(pixel2) + ', ' + str(pixel3) + ']'
-        lower = '[' + str(pixel4) + ', ' + str(pixel5) + ', ' + str(pixel6) + ']'
+        upper = np.array([pixel1, pixel2, pixel3])
+        lower = np.array([pixel4, pixel5, pixel6])
         print(lower, pixel, upper)
 
-        upperNp =  np.array([pixel1, pixel2, pixel3])
-        lowerNp =  np.array([pixel4, pixel5, pixel6])
-
-        image_mask = cv2.inRange(image_hsl, lowerNp, upperNp)
+        image_mask = cv2.inRange(image_hsl, lower, upper)
         cv2.imshow("mask", image_mask)
 
 # mouse callback function for bgr
