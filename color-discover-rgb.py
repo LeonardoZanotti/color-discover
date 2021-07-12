@@ -15,7 +15,7 @@ def main():
 	if image is None:
 		print('Use python3.7 color-discover-rgb.py --image path/to/image')
 		return
-	image_gau = cv2.GaussianBlur(image, (5, 5), 0)
+	image_blur = cv2.GaussianBlur(image, (5, 5), 0)
 	image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 	# define the list of boundaries
@@ -46,8 +46,8 @@ def main():
 		upper = np.array(upper, dtype = "uint8")
 		# find the colors within the specified boundaries and apply
 		# the mask
-		mask = cv2.inRange(image_gau, lower, upper)
-		output = cv2.bitwise_and(image_gau, image_gau, mask = mask)
+		mask = cv2.inRange(image_blur, lower, upper)
+		output = cv2.bitwise_and(image_blur, image_blur, mask = mask)
 		output_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
 
 		## calculate the percentage
